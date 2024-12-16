@@ -2,6 +2,8 @@ import Frame from "@/components/Frame";
 import type { NextPage } from "next";
 import Image from "next/image";
 import { FaUser, FaTag, FaCalendarAlt } from "react-icons/fa"; // React Icons
+import { FiArrowRight } from "react-icons/fi"; // Import the left arrow icon
+import Link from "next/link";
 
 const BlogPage: NextPage = () => {
   const posts = [
@@ -62,11 +64,34 @@ const BlogPage: NextPage = () => {
   return (
     <div>
       {/* Hero Section */}
-      <div
-        className="w-full h-[400px] bg-cover bg-center relative"
-        style={{ backgroundImage: `url('/images/rectangle-1.png')` }}
-      >
+      <div className="relative w-full h-[316px] flex items-center justify-center text-center text-[48px] text-black font-poppins py-5">
+      <Image
+        className="absolute top-0 left-0 w-full h-[316px] object-cover"
+        width={1440}
+        height={316}
+        alt=""
+        src="/images/rectangle-2.png"
+      />
+      <div className="absolute top-[61px] left-[50%] transform -translate-x-[50%] w-[196px] h-[133px]">
+        <div className="absolute top-[61px] left-6 font-medium">Blogs</div>
+        <Image
+          className="absolute top-0 left-[55px] w-[77px] h-[77px] object-cover"
+          width={77}
+          height={77}
+          alt=""
+          src="/images/Meubel House_Logos-05 (1).png"
+        />
       </div>
+      <div className="absolute top-[195px] left-[50%] transform -translate-x-[50%] w-[145px] h-[24px] text-[16px]">
+        <Link href="/" className="absolute top-0 left-0 font-medium">
+          Home
+        </Link>
+        <Link href="/blog" className="absolute top-0 left-[80px] font-light">
+          Blog
+        </Link>
+        <FiArrowRight className="absolute top-[2px] left-[54px] text-[20px] text-black" />
+      </div>
+    </div>
 
       {/* Main Layout */}
       <div className="flex flex-col lg:flex-row gap-8 p-6">

@@ -1,18 +1,35 @@
-'use client'
+"use client";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import Logo from "@/public/Logo.jpg";
 import Link from "next/link";
+import Logo from "@/public/Logo.jpg";
 import { MdPersonOutline } from "react-icons/md";
 import { CiSearch } from "react-icons/ci";
 import { GoHeart } from "react-icons/go";
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import { useState } from "react"; // Import useState for toggling the mobile menu
+import ShoppingCart from "./ShoppingCart";
+import { FaShoppingCart } from "react-icons/fa";
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // State for toggling mobile menu
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // State for mobile menu
+  const [isCartOpen, setIsCartOpen] = useState(false); // State for shopping cart
 
   // Toggle menu visibility
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  // Toggle cart visibility
+  const toggleCart = () => setIsCartOpen(!isCartOpen);
+
+  // Close menu when resizing to desktop view
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <header className="bg-white shadow-md fixed w-full z-50">
@@ -20,32 +37,53 @@ export default function Header() {
         {/* Logo Section */}
         <div className="flex items-center">
           <Link href="/">
-            <Image src={Logo} width={185} height={41} alt="Brand Logo" className="cursor-pointer" />
+            <Image
+              src={Logo}
+              width={185}
+              height={41}
+              alt="Brand Logo"
+              className="cursor-pointer"
+            />
           </Link>
         </div>
 
-        {/* Navigation Links */}
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-10 text-gray-700">
           <Link href="/" className="hover:text-gray-900 text-base transition">
             Home
           </Link>
-          <Link href="/shop" className="hover:text-gray-900 text-base transition">
+          <Link
+            href="/shop"
+            className="hover:text-gray-900 text-base transition"
+          >
             Shop
           </Link>
-          <Link href="/blog" className="hover:text-gray-900 text-base transition">
+          <Link
+            href="/blog"
+            className="hover:text-gray-900 text-base transition"
+          >
             Blog
           </Link>
-          <Link href="/contact" className="hover:text-gray-900 text-base transition">
+          <Link
+            href="/contact"
+            className="hover:text-gray-900 text-base transition"
+          >
             Contact
           </Link>
         </nav>
 
-        {/* Icon Section */}
-        <div className="flex space-x-6 text-gray-600">
+        {/* Desktop Icons */}
+        <div className="hidden md:flex space-x-6 text-gray-600">
           <MdPersonOutline className="text-2xl cursor-pointer hover:text-gray-800 transition" />
           <CiSearch className="text-2xl cursor-pointer hover:text-gray-800 transition" />
           <GoHeart className="text-2xl cursor-pointer hover:text-gray-800 transition" />
-          <AiOutlineShoppingCart className="text-2xl cursor-pointer hover:text-gray-800 transition" />
+          {/* Shopping Cart Icon */}
+          <button
+            onClick={toggleCart}
+            className="text-2xl text-gray-600 hover:text-gray-800 transition"
+          >
+            <FaShoppingCart />
+          </button>
         </div>
 
         {/* Mobile Menu Button */}
@@ -61,31 +99,67 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       <div
-        className={`md:hidden bg-white border-t shadow-md ${isMenuOpen ? "block" : "hidden"}`}
+        className={`md:hidden bg-white border-t shadow-md ${
+          isMenuOpen ? "block" : "hidden"
+        }`}
       >
-        <ul className="flex flex-col space-y-4 p-4">
-          <li>
-            <Link href="/" className="block text-gray-700 hover:text-gray-900 transition">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link href="/shop" className="block text-gray-700 hover:text-gray-900 transition">
-              Shop
-            </Link>
-          </li>
-          <li>
-            <Link href="/blog" className="block text-gray-700 hover:text-gray-900 transition">
-              Blog
-            </Link>
-          </li>
-          <li>
-            <Link href="/contact" className="block text-gray-700 hover:text-gray-900 transition">
-              Contact
-            </Link>
-          </li>
-        </ul>
+        <div className="p-4 space-y-6">
+          {/* Links Section for Mobile */}
+          <ul className="space-y-4">
+            <li>
+              <Link
+                href="/"
+                onClick={() => toggleMenu()}
+                className="block text-gray-700 hover:text-gray-900 transition"
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/shop"
+                onClick={() => toggleMenu()}
+                className="block text-gray-700 hover:text-gray-900 transition"
+              >
+                Shop
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/blog"
+                onClick={() => toggleMenu()}
+                className="block text-gray-700 hover:text-gray-900 transition"
+              >
+                Blog
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/contact"
+                onClick={() => toggleMenu()}
+                className="block text-gray-700 hover:text-gray-900 transition"
+              >
+                Contact
+              </Link>
+            </li>
+            <div className="flex space-x-8 justify-between text-gray-600">
+              <MdPersonOutline  onClick={() => toggleMenu()}  className="text-2xl cursor-pointer hover:text-gray-800 transition" />
+              <CiSearch  onClick={() => toggleMenu()} className="text-2xl cursor-pointer hover:text-gray-800 transition" />
+              <GoHeart  onClick={() => toggleMenu()} className="text-2xl cursor-pointer hover:text-gray-800 transition" />
+              {/* Shopping Cart Icon */}
+              <button
+                onClick={toggleCart}
+                className="text-2xl text-gray-600 hover:text-gray-800 transition"
+              >
+                <FaShoppingCart onClick={() => toggleMenu()} />
+              </button>
+            </div>
+          </ul>
+        </div>
       </div>
+
+      {/* Shopping Cart Sidebar */}
+      <ShoppingCart isOpen={isCartOpen} onClose={toggleCart} />
     </header>
   );
 }

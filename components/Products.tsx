@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import Button from './Button';
 import ProductCard from './ProductCard';
 
 enum BadgeType {
@@ -92,11 +94,9 @@ const ProductGrid: React.FC = () => {
           />
         ))}
       </div>
-      <div className="flex justify-center mt-8">
-        <button className="px-6 py-2 bg-yellow text-white font-medium rounded-lg hover:bg-yellow-700 transition">
-          Show More
-        </button>
-      </div>
+      <Link href='/shop'>
+     <Button label='Show More'/>
+     </Link>
     </div>
   );
 };

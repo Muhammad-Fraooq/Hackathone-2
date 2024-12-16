@@ -1,83 +1,84 @@
-import type { NextPage } from 'next';
-import Image from 'next/image';
+"use client";
+import type { NextPage } from "next";
+import Image from "next/image";
+import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
+import { useState } from "react";
 
-const Inspirations: NextPage = () => {
+const imageData = [
+  { id: 1, src: "/images/rectangle-24.png", title: "Inner Peace" },
+  { id: 2, src: "/images/rectangle-25.png", title: "Modern Style" },
+  { id: 3, src: "/images/rectangle-24.png", title: "Cozy Corner" },
+  { id: 4, src: "/images/rectangle-25.png", title: "Serenity" },
+  { id: 5, src: "/images/rectangle-24.png", title: "Cozy Corner" },
+  { id: 6, src: "/images/rectangle-25.png", title: "Serenity" },
+];
+
+const InspirationSection: NextPage = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const goToPrevious = () => {
+    if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
+  };
+
+  const goToNext = () => {
+    if (currentIndex < imageData.length - 2) setCurrentIndex(currentIndex + 1);
+  };
+
   return (
-    <div className="relative bg-gray-50 py-16 px-8 md:px-16">
-      {/* Title Section */}
-      <div className="text-center max-w-3xl mx-auto mb-12">
-        <h2 className="text-4xl font-bold text-gray-800">
-          50+ Beautiful rooms inspiration
+    <div className="relative flex flex-col gap-4 md:flex-row items-center justify-between w-full bg-[#fcf8f3] px-6 md:px-12 py-10 font-poppins">
+      {/* Left Content Section */}
+      <div className="w-full md:w-1/3 flex flex-col justify-center space-y-4 text-center md:text-left mb-6 md:mb-0">
+        <h2 className="text-3xl md:text-[40px] font-bold text-[#3a3a3a] leading-tight">
+          50+ Beautiful rooms <br /> inspiration
         </h2>
-        <p className="text-gray-600 mt-4">
-          Our designer already made a lot of beautiful prototypes of rooms that inspire you.
+        <p className="text-[#616161] text-base md:text-lg leading-[150%]">
+          Our designer already made a lot of beautiful prototype rooms that inspire you.
         </p>
-      </div>
-
-      {/* Products Section */}
-      <div className="flex flex-wrap justify-center gap-8">
-        {/* Product Card 1 */}
-        <div className="relative w-[404px] h-[582px] bg-gray-100 shadow-lg rounded-lg overflow-hidden">
-          <Image
-            src="/Rectangle 24.png"
-            alt="Bed Room"
-            width={404}
-            height={582}
-            className="object-cover"
-          />
-          {/* Overlay Content */}
-          <div className="absolute inset-0 flex flex-col justify-end p-4 bg-gradient-to-t from-black/60 via-transparent">
-            <div className="flex items-center gap-2 mb-4 text-white">
-              <span className="text-sm font-medium">01</span>
-              <div className="w-8 h-[1px] bg-white"></div>
-              <span className="text-sm font-medium">Bed Room</span>
-            </div>
-            <h3 className="text-xl font-semibold text-white">Inner Peace</h3>
-          </div>
-        </div>
-
-        {/* Product Card 2 */}
-        <div className="w-[372px] h-[486px] bg-gray-100 shadow-lg rounded-lg overflow-hidden">
-          <Image
-            src="/Rectangle 25.png"
-            alt="Product 2"
-            width={372}
-            height={486}
-            className="object-cover"
-          />
-        </div>
-
-        {/* Product Card 3 */}
-        <div className="w-[372px] h-[486px] bg-gray-100 shadow-lg rounded-lg overflow-hidden">
-          <Image
-            src="/Rectangle 26.png"
-            alt="Product 3"
-            width={372}
-            height={486}
-            className="object-cover"
-          />
-        </div>
-      </div>
-
-      {/* Indicator Section */}
-      <div className="flex justify-center items-center gap-4 mt-8">
-        <Image src="/Active.svg" alt="Active" width={27} height={27} />
-        <div className="w-6 h-6 bg-gray-300 rounded-full"></div>
-        <div className="w-6 h-6 bg-gray-300 rounded-full"></div>
-        <div className="w-6 h-6 bg-gray-300 rounded-full"></div>
-      </div>
-
-      {/* Call-To-Action Section */}
-      <div className="flex justify-center mt-12">
-        <a
-          href="#"
-          className="px-8 py-4 bg-orange-500 text-white text-lg font-semibold rounded-lg hover:bg-orange-600 transition"
-        >
+        <button className="px-4 py-3 bg-[#b88e2f] text-white font-semibold rounded-md mx-auto md:mx-0">
           Explore More
-        </a>
+        </button>
+      </div>
+
+      {/* Right Carousel Section */}
+      <div className="relative w-full md:w-2/3 flex items-center">
+        {/* Left Arrow */}
+        {currentIndex > 0 && (
+          <button
+            onClick={goToPrevious}
+            className="absolute left-0 md:left-[-40px] z-10 p-3 bg-[#b88e2f] text-white rounded-full hover:bg-[#916f20] transition">
+            <FaArrowLeft size={20} />
+          </button>
+        )}
+
+        {/* Image Slider */}
+        <div className="flex gap-2 overflow-hidden p-2">
+          {imageData.slice(currentIndex, currentIndex + 3).map((image, index) => (
+            <div
+              key={image.id}
+              className={`relative flex-shrink-0 ${
+                index === 2 ? "w-[220px] md:w-[300px]" : "w-[250px] md:w-[400px]"
+              } h-[300px] md:h-[450px]`}>
+              <Image
+                src={image.src}
+                alt={image.title}
+                layout="fill"
+                className="object-cover rounded-lg"
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Right Arrow */}
+        {currentIndex < imageData.length - 2 && (
+          <button
+            onClick={goToNext}
+            className="absolute right-0 md:right-[-40px] z-10 p-3 bg-[#b88e2f] text-white rounded-full hover:bg-[#916f20] transition">
+            <FaArrowRight size={20} />
+          </button>
+        )}
       </div>
     </div>
   );
 };
 
-export default Inspirations;
+export default InspirationSection;

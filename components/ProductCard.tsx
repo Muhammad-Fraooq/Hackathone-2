@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { FiHeart, FiShare2, FiBarChart2 } from "react-icons/fi";
-
+import Link from "next/link";
 type BadgeType = "discount" | "new";
 
 interface ProductCardProps {
@@ -64,13 +64,15 @@ const ProductCard: React.FC<ProductCardProps> = ({
       {/* Hover actions */}
       {isHovered && (
         <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center space-y-4 transition-opacity">
-          <button className="px-6 py-2 bg-white text-yellow-500 text-yellow font-medium transition">
-            Add to Cart
-          </button>
+          <Link href='/productdetails'>
+            <button className="px-6 py-2 bg-white text-yellow-500 text-yellow font-medium transition">
+              Add to Cart
+            </button>
+          </Link>
           <div className="flex space-x-4 text-white">
             <button className="hover:text-gray-200 flex gap-1 transition">
               <FiShare2 size={20} />
-               Share
+              Share
             </button>
             <button className="hover:text-gray-200 flex gap-1 transition">
               <FiBarChart2 size={20} /> Compare
