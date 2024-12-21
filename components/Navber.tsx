@@ -87,7 +87,22 @@ export default function Header() {
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center">
+        <div className="md:hidden gap-4 flex items-center">
+          {/* Shopping Cart Icon */}
+          <button
+            className="text-2xl text-gray-600 hover:text-gray-800 transition"
+          >
+            <Link href={`/cart`}
+              className="text-2xl text-gray-600 hover:text-gray-800 transition"
+            >
+              <div className="relative">
+                <FaShoppingCart size={24} />
+                <span className="absolute top-[-10px] right-[-10px] bg-yellow-500 text-white text-xs rounded-full px-2 py-1">
+                  {getItemCount()}
+                </span>
+              </div>
+            </Link>
+          </button>
           <button
             onClick={toggleMenu}
             className="text-2xl text-gray-600 focus:outline-none"
@@ -95,6 +110,7 @@ export default function Header() {
             {isMenuOpen ? "×" : "☰"}
           </button>
         </div>
+
       </div>
 
       {/* Mobile Navigation */}
@@ -145,21 +161,7 @@ export default function Header() {
               <MdPersonOutline onClick={() => toggleMenu()} className="text-2xl cursor-pointer hover:text-gray-800 transition" />
               <CiSearch onClick={() => toggleMenu()} className="text-2xl cursor-pointer hover:text-gray-800 transition" />
               <GoHeart onClick={() => toggleMenu()} className="text-2xl cursor-pointer hover:text-gray-800 transition" />
-              {/* Shopping Cart Icon */}
-              <button
-                className="text-2xl text-gray-600 hover:text-gray-800 transition"
-              >
-                <Link onClick={() => toggleMenu()}  href={`/cart`}
-                  className="text-2xl text-gray-600 hover:text-gray-800 transition"
-                >
-                  <div className="relative">
-                    <FaShoppingCart size={24} />
-                    <span className="absolute top-[-10px] right-[-10px] bg-yellow-500 text-white text-xs rounded-full px-2 py-1">
-                      {getItemCount()}
-                    </span>
-                  </div>
-                </Link>
-              </button>
+
             </div>
           </ul>
         </div>

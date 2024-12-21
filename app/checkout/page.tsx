@@ -394,11 +394,16 @@ const CheckoutPage = () => {
 
           {/* Payment Processing Modal */}
           {paymentProcessing && (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50">
-              <div className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full md:w-1/2 lg:w-1/3 text-center mx-4">
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50">
+              <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full md:w-1/2 lg:w-1/3 text-center mx-4">
                 <div className="flex flex-col items-center mb-6">
-                  {/* Animated Loading Spinner */}
-                  <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+                  {/* Modern Animated Dot Loader */}
+                  <div className="flex space-x-2 mb-4">
+                    <div className="w-4 h-4 bg-blue-500 rounded-full animate-bounce"></div>
+                    <div className="w-4 h-4 bg-blue-500 rounded-full animate-bounce100"></div>
+                    <div className="w-4 h-4 bg-blue-500 rounded-full animate-bounce200"></div>
+                  </div>
+
                   {/* Loading Icon */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -423,6 +428,8 @@ const CheckoutPage = () => {
               </div>
             </div>
           )}
+
+
 
           {/* Confirmation Modal */}
           {paymentSuccess && (

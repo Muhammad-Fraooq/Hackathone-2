@@ -25,6 +25,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
     >
       {/* Image Section */}
       <div className="relative w-full h-64 sm:h-56 md:h-60 lg:h-72">
+        <Link href={`/productdetails/${id.toString()}`}>
         <Image
           src={image}
           alt={name}
@@ -39,6 +40,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             {badge.label}
           </span>
         )}
+        </Link>
       </div>
 
       {/* Content Section */}

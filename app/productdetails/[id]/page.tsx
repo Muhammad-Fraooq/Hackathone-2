@@ -346,7 +346,8 @@ const items = [
 const ProductDetails = () => {
   const [activeTab, setActiveTab] = useState("description");
   const [mainImage, setMainImage] = useState<string>("");
-
+  const [showNotification, setShowNotification] = useState(false);
+  const [progressing, setProgressing] = useState(false);
   const { addToCart } = useCart();
   const [selectedSize, setSelectedSize] = useState<string>("");
 
@@ -364,7 +365,9 @@ const ProductDetails = () => {
 
     addToCart(cartItem); // Call the addToCart function from the context
     console.log(cartItem.image)
+    setShowNotification(true);
   };
+
   useEffect(() => {
     if (product) {
       setMainImage(product.mainImage);  // Set the main image from the product list
@@ -372,7 +375,19 @@ const ProductDetails = () => {
     }
   }, [product]); // Ensure product is loaded and image is set
 
+  useEffect(() => {
+    if (showNotification) {
+      // Start the progress bar animation
+      setProgressing(true);
 
+      // Hide the notification after a delay (e.g., 5 seconds)
+      const timeout = setTimeout(() => {
+        setShowNotification(false);
+      }, 3000); // Notification will disappear after 5 seconds
+
+      return () => clearTimeout(timeout); // Clean up on unmount
+    }
+  }, [showNotification]);
 
   if (!product) {
     return <div className="text-center mt-20 text-red-500">Product not found.</div>;
@@ -454,8 +469,8 @@ const ProductDetails = () => {
                     key={size}
                     onClick={() => setSelectedSize(size)}
                     className={`px-4 py-2 border rounded-md transition duration-200 ${selectedSize === size
-                        ? "border-blue-500 bg-blue-100"
-                        : "border-gray-300"
+                      ? "border-blue-500 bg-blue-100"
+                      : "border-gray-300"
                       } hover:bg-blue-50`}
                   >
                     {size}
@@ -465,18 +480,35 @@ const ProductDetails = () => {
             </div>
           )}
 
+          {showNotification && (
+            <div className="fixed -top-6 left-0 sm:left-auto sm:right-8 md:right-0 bg-gray-900 text-gray-100 px-6 py-4 rounded-lg shadow-lg z-50 animate-slideInRight overflow-hidden">
+              {/* Message */}
+              <p className="font-heading text-sm md:text-base font-medium">
+                ✅ Item added to cart successfully!
+              </p>
+              {/* Progress Bar */}
+              <div
+                className={`absolute bottom-0 left-0 h-1 bg-yellow-400 transition-all duration-300 ${progressing ? "w-full animate-progressBar" : "w-0"
+                  }`}
+              ></div>
+            </div>
+          )}
+
+
           {/* Add to Cart Button */}
-          <div className="mt-6 flex space-x-4">
+          <div className="mt-6 flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0">
+
             <button
               onClick={() => handleAddToCart({ product })}
-              className="flex items-center px-6 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-all duration-200"
+              className="flex items-center justify-center px-6 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-all duration-200"
             >
               <FiShoppingCart className="mr-2" /> Add to Cart
             </button>
-            <button className="flex items-center px-6 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-all duration-200">
+            <button className="flex items-center justify-center px-6 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-all duration-200">
               <FiHeart className="mr-2" /> Compare
             </button>
           </div>
+
 
           {/* Category, SKU, and Tags */}
           <div className="mt-6 text-sm text-gray-500 space-y-2">
@@ -502,7 +534,7 @@ const ProductDetails = () => {
           {/* Share Section */}
           <div className="mt-6">
             <p className="text-sm font-semibold mb-4 text-gray-800">Share:</p>
-            <div className="flex space-x-6 text-xl text-gray-600">
+            <div className="flex flex-wrap items-center gap-4 text-base sm:text-xl text-gray-600">
               <a
                 href="#"
                 className="flex items-center space-x-2 hover:text-blue-600 transition duration-300 ease-in-out"
@@ -526,43 +558,51 @@ const ProductDetails = () => {
               </a>
             </div>
           </div>
+
         </div>
       </div>
 
       {/* Tabs Section */}
       <div className="mt-8 bg-white rounded-lg shadow-md p-4 sm:p-6">
-        <div className="flex space-x-4 border-b pb-2">
+        {/* Tab Buttons */}
+        <div className="flex flex-wrap gap-2 sm:gap-4 border-b pb-2">
           {["description", "reviews", "additionalInformation"].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`text-sm font-medium ${activeTab === tab
-                  ? "text-blue-600 border-b-2 border-blue-600"
-                  : "text-gray-500 hover:text-blue-600"
+              className={`text-sm sm:text-base font-medium px-3 py-1 rounded-md ${activeTab === tab
+                ? "text-blue-600 border-b-2 border-blue-600"
+                : "text-gray-500 hover:text-blue-600"
                 }`}
             >
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
             </button>
           ))}
         </div>
+
+        {/* Tab Content */}
         <div className="mt-4">
-          {activeTab === "description" && <p>{product.description}</p>}
+          {activeTab === "description" && (
+            <p className="text-sm sm:text-base text-gray-600">{product.description}</p>
+          )}
           {activeTab === "reviews" && product.reviews.length > 0 && (
             <>
               {product.reviews.map((review, idx) => (
-                <div key={idx} className="mt-4">
-                  <p className="font-medium">{review.name}</p>
-                  <p>{review.rating}</p>
-                  <p>{review.text}</p>
+                <div key={idx} className="mt-4 space-y-1">
+                  <p className="font-medium text-gray-700">{review.name}</p>
+                  <p className="text-yellow-500 text-sm">Rating: {review.rating}</p>
+                  <p className="text-sm text-gray-600">{review.text}</p>
                 </div>
               ))}
             </>
           )}
           {activeTab === "reviews" && product.reviews.length === 0 && (
-            <p>No reviews available for this product.</p>
+            <p className="text-sm sm:text-base text-gray-500">
+              No reviews available for this product.
+            </p>
           )}
           {activeTab === "additionalInformation" && (
-            <ul className="list-disc list-inside space-y-2 text-sm text-gray-600 leading-relaxed">
+            <ul className="list-disc list-inside space-y-2 text-sm sm:text-base text-gray-600 leading-relaxed">
               {product.additionalInfo.map((info, index) => (
                 <li key={index}>
                   <strong>{info.label}:</strong> {info.value}
@@ -572,6 +612,7 @@ const ProductDetails = () => {
           )}
         </div>
       </div>
+
 
       {/* Related Products Grid */}
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -593,7 +634,9 @@ const ProductDetails = () => {
           ))}
         </div>
         <div className="text-center mt-6">
-          <Button label="Show More" />
+          <Link href={`/shop`}>
+            <Button label="Show More" />
+          </Link>
         </div>
       </div>
     </div>

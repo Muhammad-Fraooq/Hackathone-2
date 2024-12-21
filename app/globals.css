@@ -39,3 +39,16 @@ body {
     transform: rotate(360deg);
   }
 }
+
+@keyframes progressBar {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.animate-progressBar {
+  animation: progressBar 3s ease-in-out forwards;
+}

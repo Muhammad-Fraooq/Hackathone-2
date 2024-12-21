@@ -11,6 +11,25 @@ export default {
   ],
   theme: {
     extend: {
+      keyframes: {
+        slideInRight: {
+          "0%": { transform: "translateX(100%)", opacity: "0" },
+          "100%": { transform: "translateX(0)", opacity: "1" },
+        },
+        progressBar: {
+          "0%": { width: "100%" },
+          "100%": { width: "0%" },
+        },
+        fadeOut: {
+          "0%": { opacity: "1" },
+          "100%": { opacity: "0" },
+        },
+      },
+      animation: {
+        slideInRight: "slideInRight 0.4s ease-out",
+        progressBar: "progressBar 3s linear",
+        fadeOut: "fadeOut 0.5s ease-in-out",
+      },
       colors: {
         // Custom color palette based on your Figma design
         background: "var(--background)",
