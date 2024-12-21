@@ -3,206 +3,119 @@ import Image from "next/image";
 import { FaFilter, FaList, FaThLarge } from "react-icons/fa"; // Import the required icons
 import ProductCard from "@/components/ProductCard";
 import Frame from "@/components/Frame";
+import { FiArrowRight } from "react-icons/fi";
+import Link from "next/link";
 
 enum BadgeType {
   DISCOUNT = "discount",
   NEW = "new",
 }
-  const products = [
-    {
-      id: 1,
-      image: "/product1.jpg",
-      name: "Syltherine",
-      description: "Stylish cafe chair",
-      currentPrice: "2.500.000",
-      originalPrice: "3.500.000",
-      badge: { type: BadgeType.DISCOUNT, label: "-30%" },
-    },
-    {
-      id: 2, // Changed to a unique id
-      image: "/product3.jpg",
-      name: "Lolito",
-      description: "Luxury big sofa",
-      currentPrice: "7.000.000",
-      originalPrice: "14.000.000",
-      badge: { type: BadgeType.DISCOUNT, label: "-50%" },
-    },
-    {
-      id: 3,
-      image: "/product4.jpg",
-      name: "Respira",
-      description: "Outdoor bar table and stool",
-      currentPrice: "500.000",
-      badge: { type: BadgeType.NEW, label: "New" },
-    },
-    {
-      id: 4,
-      image: "/product7.png",
-      name: "Pingky",
-      description: "Cute bed set",
-      currentPrice: "7.000.000",
-      originalPrice: "14.000.000",
-      badge: { type: BadgeType.DISCOUNT, label: "-50%" },
-    },
-    // Ensure all subsequent products have unique ids as well
-    {
-      id: 5,
-      image: "/product1.jpg",
-      name: "Syltherine",
-      description: "Stylish cafe chair",
-      currentPrice: "2.500.000",
-      originalPrice: "3.500.000",
-      badge: { type: BadgeType.DISCOUNT, label: "-30%" },
-    },
-    {
-      id: 6,
-      image: "/product3.jpg",
-      name: "Lolito",
-      description: "Luxury big sofa",
-      currentPrice: "7.000.000",
-      originalPrice: "14.000.000",
-      badge: { type: BadgeType.DISCOUNT, label: "-50%" },
-    },
-    {
-      id: 7,
-      image: "/product4.jpg",
-      name: "Respira",
-      description: "Outdoor bar table and stool",
-      currentPrice: "500.000",
-      badge: { type: BadgeType.NEW, label: "New" },
-    },
-    {
-      id: 8,
-      image: "/product7.png",
-      name: "Pingky",
-      description: "Cute bed set",
-      currentPrice: "7.000.000",
-      originalPrice: "14.000.000",
-      badge: { type: BadgeType.DISCOUNT, label: "-50%" },
-    },
-    {
-      id: 9,
-      image: "/product1.jpg",
-      name: "Syltherine",
-      description: "Stylish cafe chair",
-      currentPrice: "2.500.000",
-      originalPrice: "3.500.000",
-      badge: { type: BadgeType.DISCOUNT, label: "-30%" },
-    },
-    {
-      id: 10, // Changed to a unique id
-      image: "/product3.jpg",
-      name: "Lolito",
-      description: "Luxury big sofa",
-      currentPrice: "7.000.000",
-      originalPrice: "14.000.000",
-      badge: { type: BadgeType.DISCOUNT, label: "-50%" },
-    },
-    {
-      id: 11,
-      image: "/product4.jpg",
-      name: "Respira",
-      description: "Outdoor bar table and stool",
-      currentPrice: "500.000",
-      badge: { type: BadgeType.NEW, label: "New" },
-    },
-    {
-      id: 12,
-      image: "/product7.png",
-      name: "Pingky",
-      description: "Cute bed set",
-      currentPrice: "7.000.000",
-      originalPrice: "14.000.000",
-      badge: { type: BadgeType.DISCOUNT, label: "-50%" },
-    },
-    // Ensure all subsequent products have unique ids as well
-    {
-      id: 13,
-      image: "/product1.jpg",
-      name: "Syltherine",
-      description: "Stylish cafe chair",
-      currentPrice: "2.500.000",
-      originalPrice: "3.500.000",
-      badge: { type: BadgeType.DISCOUNT, label: "-30%" },
-    },
-    {
-      id: 14,
-      image: "/product3.jpg",
-      name: "Lolito",
-      description: "Luxury big sofa",
-      currentPrice: "7.000.000",
-      originalPrice: "14.000.000",
-      badge: { type: BadgeType.DISCOUNT, label: "-50%" },
-    },
-    {
-      id: 15,
-      image: "/product4.jpg",
-      name: "Respira",
-      description: "Outdoor bar table and stool",
-      currentPrice: "500.000",
-      badge: { type: BadgeType.NEW, label: "New" },
-    },
-    {
-      id: 16,
-      image: "/product7.png",
-      name: "Pingky",
-      description: "Cute bed set",
-      currentPrice: "7.000.000",
-      originalPrice: "14.000.000",
-      badge: { type: BadgeType.DISCOUNT, label: "-50%" },
-    },
-    {
-      id: 17,
-      image: "/product1.jpg",
-      name: "Syltherine",
-      description: "Stylish cafe chair",
-      currentPrice: "2.500.000",
-      originalPrice: "3.500.000",
-      badge: { type: BadgeType.DISCOUNT, label: "-30%" },
-    },
-    {
-      id: 18,
-      image: "/product3.jpg",
-      name: "Lolito",
-      description: "Luxury big sofa",
-      currentPrice: "7.000.000",
-      originalPrice: "14.000.000",
-      badge: { type: BadgeType.DISCOUNT, label: "-50%" },
-    },
-    {
-      id: 19,
-      image: "/product4.jpg",
-      name: "Respira",
-      description: "Outdoor bar table and stool",
-      currentPrice: "500.000",
-      badge: { type: BadgeType.NEW, label: "New" },
-    },
-    {
-      id: 20,
-      image: "/product7.png",
-      name: "Pingky",
-      description: "Cute bed set",
-      currentPrice: "7.000.000",
-      originalPrice: "14.000.000",
-      badge: { type: BadgeType.DISCOUNT, label: "-50%" },
-    },
-    // Repeat this pattern for the other products, ensuring unique IDs
-  ];
-  
+const products = [
+  {
+    id: 1,
+    image: '/product1.jpg',
+    name: 'Syltherine',
+    description: 'Stylish cafe chair',
+    currentPrice: '2.500.000',
+    originalPrice: '3.500.000',
+    badge: { type: BadgeType.DISCOUNT, label: '-30%' },
+  },
+  {
+    id: 2,
+    image: '/product2.jpg',
+    name: 'Leviosa',
+    description: 'Luxury sofa',
+    currentPrice: '2.500.000',
+    badge: { type: BadgeType.NEW, label: 'New' },
+  },
+  {
+    id: 3,
+    image: '/product3.jpg',
+    name: 'Lolito',
+    description: 'Luxury big sofa',
+    currentPrice: '7.000.000',
+    originalPrice: '14.000.000',
+    badge: { type: BadgeType.DISCOUNT, label: '-50%' },
+  },
+  {
+    id: 4,
+    image: '/product4.jpg',
+    name: 'Respira',
+    description: 'Outdoor bar table and stool',
+    currentPrice: '500.000',
+    badge: { type: BadgeType.NEW, label: 'New' },
+  },
+  {
+    id: 5,
+    image: '/product5.jpg',
+    name: 'Grifo',
+    description: 'Night lamp',
+    currentPrice: '1.500.000',
+  },
+  {
+    id: 6,
+    image: '/product6.jpg',
+    name: 'Muggo',
+    description: 'Small mug',
+    currentPrice: '150.000',
+  },
+  {
+    id: 7,
+    image: '/product7.png',
+    name: 'Pingky',
+    description: 'Cute bed set',
+    currentPrice: '7.000.000',
+    originalPrice: '14.000.000',
+    badge: { type: BadgeType.DISCOUNT, label: '-50%' },
+  },
+  {
+    id: 8,
+    image: '/product8.png',
+    name: 'Potty',
+    description: 'Minimalist flower pot',
+    currentPrice: '500.000',
+    badge: { type: BadgeType.NEW, label: 'New' },
+  },
+];
 
 const Group: NextPage = () => {
   return (
     <div className="relative w-full py-8 ">
       {/* Background Image */}
-      <div className="w-full h-[316px] relative">
+      {/* <div className="w-full h-[316px] relative">
         <Image
           className="object-cover"
           layout="fill"
           alt="Background"
           src="/images/rectangle-1.png" // Ensure the correct public folder path
         />
+      </div> */}
+   <div className="relative w-full h-[316px] flex items-center justify-center text-center text-4xl font-semibold text-black">
+        <Image
+          className="absolute top-0 left-0 w-full h-full object-cover"
+          width={1440}
+          height={316}
+          alt="Background"
+          src="/images/rectangle-2.png"
+        />
+        <div className="relative">
+          <Image
+            className="mx-auto mb-4"
+            width={77}
+            height={77}
+            alt="Logo"
+            src="/images/Meubel House_Logos-05 (1).png"
+          />
+          <h1 className="text-5xl">Shop</h1>
+          <div className="flex items-center justify-center gap-2 mt-4 text-sm">
+            <Link href="/" className="hover:underline">
+              Home
+            </Link>
+            <FiArrowRight className="text-lg" />
+            <span className="font-light">Shop</span>
+          </div>
+        </div>
       </div>
-
       <div className="w-full bg-[#e7cb8c] p-4 md:p-6">
         {/* Filter and View Options */}
         <div className="flex flex-wrap items-center justify-between mb-4">
@@ -248,6 +161,7 @@ const Group: NextPage = () => {
       <div className="grid grid-cols-1 p-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product) => (
           <ProductCard
+            id={product.id}
             key={product.id}
             name={product.name}
             image={product.image}
@@ -287,7 +201,7 @@ const Group: NextPage = () => {
           </div>
         </div>
       </div>
-      <Frame/>
+      <Frame />
     </div>
   );
 };

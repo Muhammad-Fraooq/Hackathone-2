@@ -64,34 +64,32 @@ const BlogPage: NextPage = () => {
   return (
     <div>
       {/* Hero Section */}
-      <div className="relative w-full h-[316px] flex items-center justify-center text-center text-[48px] text-black font-poppins py-5">
-      <Image
-        className="absolute top-0 left-0 w-full h-[316px] object-cover"
-        width={1440}
-        height={316}
-        alt=""
-        src="/images/rectangle-2.png"
-      />
-      <div className="absolute top-[61px] left-[50%] transform -translate-x-[50%] w-[196px] h-[133px]">
-        <div className="absolute top-[61px] left-6 font-medium">Blogs</div>
+      <div className="relative w-full h-[316px] flex items-center justify-center text-center text-4xl font-semibold text-black">
         <Image
-          className="absolute top-0 left-[55px] w-[77px] h-[77px] object-cover"
-          width={77}
-          height={77}
-          alt=""
-          src="/images/Meubel House_Logos-05 (1).png"
+          className="absolute top-0 left-0 w-full h-full object-cover"
+          width={1440}
+          height={316}
+          alt="Background"
+          src="/images/rectangle-2.png"
         />
+        <div className="relative">
+          <Image
+            className="mx-auto mb-4"
+            width={77}
+            height={77}
+            alt="Logo"
+            src="/images/Meubel House_Logos-05 (1).png"
+          />
+          <h1 className="text-5xl">Blog</h1>
+          <div className="flex items-center justify-center gap-2 mt-4 text-sm">
+            <Link href="/" className="hover:underline">
+              Home
+            </Link>
+            <FiArrowRight className="text-lg" />
+            <span className="font-light">Blog</span>
+          </div>
+        </div>
       </div>
-      <div className="absolute top-[195px] left-[50%] transform -translate-x-[50%] w-[145px] h-[24px] text-[16px]">
-        <Link href="/" className="absolute top-0 left-0 font-medium">
-          Home
-        </Link>
-        <Link href="/blog" className="absolute top-0 left-[80px] font-light">
-          Blog
-        </Link>
-        <FiArrowRight className="absolute top-[2px] left-[54px] text-[20px] text-black" />
-      </div>
-    </div>
 
       {/* Main Layout */}
       <div className="flex flex-col lg:flex-row gap-8 p-6">
@@ -142,7 +140,7 @@ const BlogPage: NextPage = () => {
                     <span>{post.date}</span>
                   </div>
                 </div>
-                <button className="text-primary font-semibold hover:underline mt-4">
+                <button className="text-gray-500 font-semibold hover:underline mt-4">
                   Read more
                 </button>
               </div>
@@ -150,17 +148,25 @@ const BlogPage: NextPage = () => {
           </div>
         </div>
 
-        {/* Right Sidebar: Categories and Recent Posts */}
         <div className="flex flex-col w-full lg:w-1/4 gap-6">
+        
           {/* Categories Section */}
           <div className="bg-gray-100 rounded-lg p-6 shadow-md">
             <h2 className="text-xl font-bold mb-4">Categories</h2>
+
+            {/* Search Bar in Categories Section */}
+            <input
+              type="text"
+              placeholder="Search Categories..."
+              className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            />
+
             <ul className="space-y-4">
               {["Crafts", "Design", "Handmade", "Interior", "Wood"].map(
                 (category, index) => (
                   <li
                     key={index}
-                    className="flex items-center justify-between text-base"
+                    className="flex items-center justify-between text-base cursor-pointer hover:bg-gray-200 p-2 rounded"
                   >
                     <span>{category}</span>
                     <span className="bg-gray-300 text-sm rounded-full px-3 py-1">
@@ -195,6 +201,7 @@ const BlogPage: NextPage = () => {
           </div>
         </div>
       </div>
+      
       <div className="flex justify-center items-center space-x-2 md:space-x-4">
         {/* First Block (Yellow) */}
         <div className="flex justify-center">
@@ -224,7 +231,7 @@ const BlogPage: NextPage = () => {
           </div>
         </div>
       </div>
-      <Frame/>
+      <Frame />
     </div>
   );
 };

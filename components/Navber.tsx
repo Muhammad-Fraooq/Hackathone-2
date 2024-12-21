@@ -6,19 +6,15 @@ import Logo from "@/public/Logo.jpg";
 import { MdPersonOutline } from "react-icons/md";
 import { CiSearch } from "react-icons/ci";
 import { GoHeart } from "react-icons/go";
-import ShoppingCart from "./ShoppingCart";
 import { FaShoppingCart } from "react-icons/fa";
+import { useCart } from "@/app/Context/CartContext";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State for mobile menu
-  const [isCartOpen, setIsCartOpen] = useState(false); // State for shopping cart
+  const { getItemCount } = useCart();
 
-  // Toggle menu visibility
+
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
-  // Toggle cart visibility
-  const toggleCart = () => setIsCartOpen(!isCartOpen);
-
   // Close menu when resizing to desktop view
   useEffect(() => {
     const handleResize = () => {
@@ -49,24 +45,24 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-10 text-gray-700">
-          <Link href="/" className="hover:text-gray-900 text-base transition">
+          <Link href="/" className="hover:text-gray-900 text-lg font-heading font-medium transition">
             Home
           </Link>
           <Link
             href="/shop"
-            className="hover:text-gray-900 text-base transition"
+            className="hover:text-gray-900 text-lg font-heading font-medium transition"
           >
             Shop
           </Link>
           <Link
             href="/blog"
-            className="hover:text-gray-900 text-base transition"
+            className="hover:text-gray-900 text-lg font-heading font-medium transition"
           >
             Blog
           </Link>
           <Link
             href="/contact"
-            className="hover:text-gray-900 text-base transition"
+            className="hover:text-gray-900 text-lg font-heading font-medium transition"
           >
             Contact
           </Link>
@@ -78,12 +74,16 @@ export default function Header() {
           <CiSearch className="text-2xl cursor-pointer hover:text-gray-800 transition" />
           <GoHeart className="text-2xl cursor-pointer hover:text-gray-800 transition" />
           {/* Shopping Cart Icon */}
-          <button
-            onClick={toggleCart}
+          <Link href={`/cart`}
             className="text-2xl text-gray-600 hover:text-gray-800 transition"
           >
-            <FaShoppingCart />
-          </button>
+            <div className="relative">
+              <FaShoppingCart size={24} />
+              <span className="absolute top-[-10px] right-[-10px] bg-yellow-500 text-white text-xs rounded-full px-2 py-1">
+                {getItemCount()}
+              </span>
+            </div>
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -99,9 +99,8 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       <div
-        className={`md:hidden bg-white border-t shadow-md ${
-          isMenuOpen ? "block" : "hidden"
-        }`}
+        className={`md:hidden bg-white border-t shadow-md ${isMenuOpen ? "block" : "hidden"
+          }`}
       >
         <div className="p-4 space-y-6">
           {/* Links Section for Mobile */}
@@ -143,23 +142,28 @@ export default function Header() {
               </Link>
             </li>
             <div className="flex space-x-8 justify-between text-gray-600">
-              <MdPersonOutline  onClick={() => toggleMenu()}  className="text-2xl cursor-pointer hover:text-gray-800 transition" />
-              <CiSearch  onClick={() => toggleMenu()} className="text-2xl cursor-pointer hover:text-gray-800 transition" />
-              <GoHeart  onClick={() => toggleMenu()} className="text-2xl cursor-pointer hover:text-gray-800 transition" />
+              <MdPersonOutline onClick={() => toggleMenu()} className="text-2xl cursor-pointer hover:text-gray-800 transition" />
+              <CiSearch onClick={() => toggleMenu()} className="text-2xl cursor-pointer hover:text-gray-800 transition" />
+              <GoHeart onClick={() => toggleMenu()} className="text-2xl cursor-pointer hover:text-gray-800 transition" />
               {/* Shopping Cart Icon */}
               <button
-                onClick={toggleCart}
                 className="text-2xl text-gray-600 hover:text-gray-800 transition"
               >
-                <FaShoppingCart onClick={() => toggleMenu()} />
+                <Link onClick={() => toggleMenu()}  href={`/cart`}
+                  className="text-2xl text-gray-600 hover:text-gray-800 transition"
+                >
+                  <div className="relative">
+                    <FaShoppingCart size={24} />
+                    <span className="absolute top-[-10px] right-[-10px] bg-yellow-500 text-white text-xs rounded-full px-2 py-1">
+                      {getItemCount()}
+                    </span>
+                  </div>
+                </Link>
               </button>
             </div>
           </ul>
         </div>
       </div>
-
-      {/* Shopping Cart Sidebar */}
-      <ShoppingCart isOpen={isCartOpen} onClose={toggleCart} />
     </header>
   );
 }
