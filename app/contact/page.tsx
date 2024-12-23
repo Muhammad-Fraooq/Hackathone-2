@@ -8,14 +8,8 @@ import Button from "@/components/Button";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { FormData } from "@/types/ComponentsTypes";
 
-// Define the form data type
-interface FormData {
-  name: string;
-  email: string;
-  subject?: string;
-  message: string;
-}
 
 // Define the validation schema using Yup
 const validationSchema = yup.object().shape({
@@ -32,19 +26,22 @@ const Contact = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   // Set up React Hook Form with Yup validation
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>({
-    resolver: yupResolver(validationSchema),
+  const { register, handleSubmit,reset,formState: { errors }, } = useForm<FormData>({ resolver:yupResolver(validationSchema),
   });
 
   // Update the onSubmit function with the correct type for data
   const onSubmit = (data: FormData) => {
     // On successful form submission, show a success message
-    setFormSubmitted(true);
     console.log("Form Data: ", data); // You can send this data to an API or email service
+    setFormSubmitted(true);
+
+    // Reset the form fields
+    reset();
+
+    // Hide the success message after 3 seconds
+    setTimeout(() => {
+      setFormSubmitted(false);
+    }, 3000);
   };
 
   return (
@@ -133,7 +130,7 @@ const Contact = () => {
             <form className="space-y-6 max-w-3xl mx-auto" onSubmit={handleSubmit(onSubmit)}>
               {/* Name Field */}
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700">Your Name</label>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700">Full Name</label>
                 <input
                   type="text"
                   id="name"

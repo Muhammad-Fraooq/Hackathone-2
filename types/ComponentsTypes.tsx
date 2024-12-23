@@ -51,3 +51,11 @@ export interface ProductCardProps {
   originalPrice?: string;
   badge?: { type: BadgeType; label: string };
 }
+
+// Define the form data type
+export interface FormData {
+  name: string;
+  email: string;
+  subject?: string;
+  message: string;
+}
