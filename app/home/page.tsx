@@ -39,61 +39,69 @@ const Home = () => {
         </div>
       </div>
       <div className="text-center py-12 bg-gray-50 p-5">
-        {/* Header Section */}
-        <div className="mb-8">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-2">
-            Browse The Range
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base lg:text-lg">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          </p>
-        </div>
+  {/* Header Section */}
+  <div className="mb-8">
+    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-2">
+      Browse The Range
+    </h1>
+    <p className="text-gray-600 text-sm sm:text-base lg:text-lg">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    </p>
+  </div>
 
-        {/* Range Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Dining */}
-          <div className="flex flex-col items-center bg-white rounded-lg shadow-md p-6">
-            <Image
-              src="/img-1.png"
-              alt="Dining"
-              width={350}
-              height={350}
-              className="max-w-full h-auto"
-            />
-            <p className="mt-4 text-gray-700 font-semibold text-xl sm:text-2xl lg:text-3xl">
-              Dining
-            </p>
-          </div>
-
-          {/* Living */}
-          <div className="flex flex-col items-center bg-white rounded-lg shadow-md p-6">
-            <Image
-              src="/img-2.png"
-              alt="Living"
-              width={350}
-              height={350}
-              className="max-w-full h-auto"
-            />
-            <p className="mt-4 text-gray-700 font-semibold text-xl sm:text-2xl lg:text-3xl">
-              Living
-            </p>
-          </div>
-
-          {/* Bedroom */}
-          <div className="flex flex-col items-center bg-white rounded-lg shadow-md p-6">
-            <Image
-              src="/img-3.png"
-              alt="Bedroom"
-              width={350}
-              height={350}
-              className="max-w-full h-auto"
-            />
-            <p className="mt-4 text-gray-700 font-semibold text-xl sm:text-2xl lg:text-3xl">
-              Bedroom
-            </p>
-          </div>
-        </div>
+  {/* Range Section */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    {/* Dining */}
+    <div className="flex flex-col items-center bg-white rounded-lg shadow-md p-6">
+      <div className="relative overflow-hidden rounded-lg">
+        <Image
+          src="/img-1.png"
+          alt="Dining"
+          width={350}
+          height={350}
+          className="max-w-full h-auto transition-transform duration-300 transform hover:scale-110"
+        />
       </div>
+      <p className="mt-4 text-gray-700 font-semibold text-xl sm:text-2xl lg:text-3xl">
+        Dining
+      </p>
+    </div>
+
+    {/* Living */}
+    <div className="flex flex-col items-center bg-white rounded-lg shadow-md p-6">
+      <div className="relative overflow-hidden rounded-lg">
+        <Image
+          src="/img-2.png"
+          alt="Living"
+          width={350}
+          height={350}
+          className="max-w-full h-auto transition-transform duration-300 transform hover:scale-110"
+        />
+      </div>
+      <p className="mt-4 text-gray-700 font-semibold text-xl sm:text-2xl lg:text-3xl">
+        Living
+      </p>
+    </div>
+
+    {/* Bedroom */}
+    <div className="flex flex-col items-center bg-white rounded-lg shadow-md p-6">
+      <div className="relative overflow-hidden rounded-lg">
+        <Image
+          src="/img-3.png"
+          alt="Bedroom"
+          width={350}
+          height={350}
+          className="max-w-full h-auto transition-transform duration-300 transform hover:scale-110"
+        />
+      </div>
+      <p className="mt-4 text-gray-700 font-semibold text-xl sm:text-2xl lg:text-3xl">
+        Bedroom
+      </p>
+    </div>
+  </div>
+</div>
+
+
 
     </>
   );

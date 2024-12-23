@@ -1,8 +1,7 @@
-import type { NextPage } from "next";
 import Link from "next/link";
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaFacebookF, FaLinkedinIn, FaGithub } from "react-icons/fa";
 
-const Footer: NextPage = () => {
+const Footer = () => {
   return (
     <footer className=" text-gray-100 py-10 border-t border-gray-400">
       {/* Main Footer Content */}
@@ -15,16 +14,13 @@ const Footer: NextPage = () => {
             FL 33134 USA
           </p>
           <div className="flex space-x-4 mt-4">
-            <Link href="#" aria-label="Facebook">
+            <Link href="https://www.facebook.com/profile.php?id=61557075680613" aria-label="Facebook">
               <FaFacebookF className="text-gray-500 hover:text-yellow-500 transition duration-300" size={20} />
             </Link>
-            <Link href="#" aria-label="Twitter">
-              <FaTwitter className="text-gray-500 hover:text-yellow-500 transition duration-300" size={20} />
+            <Link href="https://github.com/Muhammad-Fraooq" aria-label="Twitter">
+              <FaGithub className="text-gray-500 hover:text-yellow-500 transition duration-300" size={20} />
             </Link>
-            <Link href="#" aria-label="Instagram">
-              <FaInstagram className="text-gray-500 hover:text-yellow-500 transition duration-300" size={20} />
-            </Link>
-            <Link href="#" aria-label="LinkedIn">
+            <Link href="https://www.linkedin.com/in/muhammad-farooq-developer/" aria-label="LinkedIn">
               <FaLinkedinIn className="text-gray-500 hover:text-yellow-500 transition duration-300" size={20} />
             </Link>
           </div>
@@ -34,10 +30,18 @@ const Footer: NextPage = () => {
         <div>
           <h3 className="text-lg font-semibold text-yellow-500 mb-4">Quick Links</h3>
           <ul className="space-y-2">
-            {["Home", "Shop", "About Us", "Contact"].map((link) => (
-              <li key={link}>
-                <Link href="#" className="hover:text-yellow-500 text-gray-500 transition duration-300">
-                  {link}
+            {[
+              { name: "Home", href: "/" },
+              { name: "Shop", href: "/shop" },
+              { name: "About Us", href: "/about" },
+              { name: "Contact", href: "/contact" },
+            ].map((link) => (
+              <li key={link.name}>
+                <Link
+                  href={link.href}
+                  className="hover:text-yellow-500 text-gray-500 transition duration-300"
+                >
+                  {link.name}
                 </Link>
               </li>
             ))}

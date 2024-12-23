@@ -35,7 +35,7 @@ const CartPage = () => {
           alt="Background"
           src="/images/rectangle-2.png"
         />
-        <div className="relative mt-8">
+        <div className="relative mt-8 p-6 rounded-lg">
           <Image
             className="mx-auto mb-2 md:mb-4"
             width={60}
@@ -59,10 +59,10 @@ const CartPage = () => {
         {/* Cart Items */}
         <div className="w-full lg:w-3/4">
           {/* Table Headers */}
-          <div className="grid grid-cols-4 md:grid-cols-5 gap-2 md:gap-4 bg-[#f9f1e7] py-2 md:py-3 px-3 md:px-4 font-medium text-xs md:text-sm lg:text-base">
+          <div className="grid grid-cols-4 md:grid-cols-5 gap-2 md:gap-4 bg-[#f9f1e7] py-2 md:py-3 px-3 md:px-4 font-medium text-xs md:text-sm lg:text-base shadow-sm rounded-lg">
             <div>Product</div>
             <div>Price</div>
-            <div className="hidden md:block">Size</div>
+            <div>Size</div>
             <div>Quantity</div>
             <div>Subtotal</div>
           </div>
@@ -79,7 +79,7 @@ const CartPage = () => {
             cartItems.map((item) => (
               <div
                 key={item.id}
-                className="grid grid-cols-4 md:grid-cols-5 gap-2 md:gap-4 items-center py-3 md:py-4 px-3 md:px-4 border-b text-xs md:text-sm lg:text-base"
+                className="grid grid-cols-4 md:grid-cols-5 gap-2 md:gap-4 items-center py-3 md:py-4 px-3 md:px-4 border-b text-xs md:text-sm lg:text-base hover:bg-gray-100 transition-all rounded-md"
               >
                 {/* Product Info */}
                 <div className="flex items-center space-x-3 col-span-4 md:col-span-1">
@@ -103,7 +103,7 @@ const CartPage = () => {
                 </div>
 
                 {/* Size */}
-                <div className="hidden md:block text-center md:text-left">
+                <div className=" text-center md:text-left">
                   {item.size || 'N/A'}
                 </div>
 
@@ -113,12 +113,13 @@ const CartPage = () => {
                     type="number"
                     value={item.quantity}
                     onChange={(e) => handleQuantityChange(e, item.id)}
-                    className="w-10 md:w-16 border rounded-md text-center"
+                    className="w-10 md:w-16 border rounded-md text-center focus:outline-none focus:ring-2 focus:ring-yellow-500"
                   />
                   <FaTrash
                     size={16}
                     className="text-yellow-600 cursor-pointer hover:text-yellow-700"
                     onClick={() => removeItem(item.id)}
+                    aria-label="Remove Item"
                   />
                 </div>
 
@@ -132,7 +133,7 @@ const CartPage = () => {
         </div>
 
         {/* Cart Totals */}
-        <div className="w-full lg:w-1/4 bg-[#f9f1e7] p-4 sm:p-6 rounded-lg">
+        <div className="w-full lg:w-1/4 bg-[#f9f1e7] p-4 sm:p-6 rounded-lg shadow-md">
           <h2 className="text-lg md:text-xl font-bold mb-4">Cart Totals</h2>
           <div className="flex justify-between mb-3 md:mb-4 text-sm md:text-base">
             <span>Subtotal:</span>
